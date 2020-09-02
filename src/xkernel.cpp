@@ -59,7 +59,8 @@ namespace xeus
                      history_manager_ptr history_manager,
                      logger_ptr logger,
                      server_builder sbuilder,
-                     debugger_builder dbuilder)
+                     debugger_builder dbuilder,
+                     nl::json::error_handler_t eh)
         : m_config(config)
         , m_user_name(user_name)
         , p_interpreter(std::move(interpreter))
@@ -67,6 +68,7 @@ namespace xeus
         , p_logger(std::move(logger))
         , m_server_builder(sbuilder)
         , m_debugger_builder(dbuilder)
+        , m_error_handler(eh)
     {
         init();
     }
@@ -76,13 +78,15 @@ namespace xeus
                      history_manager_ptr history_manager,
                      logger_ptr logger,
                      server_builder sbuilder,
-                     debugger_builder dbuilder)
+                     debugger_builder dbuilder,
+                     nl::json::error_handler_t eh)
         : m_user_name(user_name)
         , p_interpreter(std::move(interpreter))
         , p_history_manager(std::move(history_manager))
         , p_logger(std::move(logger))
         , m_server_builder(sbuilder)
         , m_debugger_builder(dbuilder)
+        , m_error_handler(eh)
     {
         init();
     }
@@ -122,7 +126,8 @@ namespace xeus
                                                 p_server.get(),
                                                 p_interpreter.get(),
                                                 p_history_manager.get(),
-                                                p_debugger.get());
+                                                p_debugger.get(),
+                                                m_error_handler);
 
         xcontrol_messenger& messenger = p_server->get_control_messenger();
 
@@ -132,6 +137,7 @@ namespace xeus
         }
 
         p_interpreter->register_control_messenger(messenger);
+        p_interpreter->register_history_manager(*p_history_manager);
         p_interpreter->configure();
     }
 
@@ -144,5 +150,10 @@ namespace xeus
     const xconfiguration& xkernel::get_config()
     {
         return m_config;
+    }
+
+    xserver& xkernel::get_server()
+    {
+        return *p_server;
     }
 }

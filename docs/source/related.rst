@@ -4,14 +4,6 @@
 
    The full license is in the file LICENSE, distributed with this software.
 
-.. raw:: html
-
-   <style>
-   h2 {
-        display: none;
-   }
-   </style>
-
 Related projects
 ================
 
@@ -39,6 +31,14 @@ language based on the Xeus implementation of the protocol.
 
 .. image:: xeus-python-screencast.gif
    :alt: xeus-python screencast
+
+xeus-sqlite
+-----------
+
+The `xeus-sqlite`_ project is a Jupyter kernel for the SQLite.
+
+.. image:: xeus-sqlite-screenshot.png
+   :alt: xeus-sqlite screenshot
 
 xwidgets
 ---------
@@ -72,6 +72,7 @@ built with Xeus and Rcpp_.
 
 .. _xeus-cling: https://github.com/jupyter-xeus/xeus-cling
 .. _xeus-python: https://github.com/jupyter-xeus/xeus-python
+.. _xeus-sqlite: https://github.com/jupyter-xeus/xeus-sqlite
 .. _xwidgets: https://github.com/QuantStack/xwidgets
 .. _JuniperKernel: https://github.com/JuniperKernel/JuniperKernel
 .. _Rcpp: https://github.com/RcppCore/Rcpp
